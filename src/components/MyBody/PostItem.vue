@@ -1,8 +1,8 @@
 <template>
   <div class="post">
-    <div>
-      <div><strong>Задача №{{ post.title }}</strong></div>
-      <div><strong>Описание: </strong>{{ post.body }}</div>
+    <div class="post__text">
+      <div><strong>Задача №{{}}</strong></div>
+      <div><strong>Описание: </strong>{{ post.title }}</div>
     </div>
     <div class="post__btns">
       <my-button @click="$emit('remove', post)">
@@ -32,5 +32,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.post__text{
+  color: dodgerblue;
 }
 </style>

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import PostItem from "@/components/PostItem";
+import PostItem from "@/components/MyBody/PostItem";
 export default {
   components: {PostItem},
   props:{

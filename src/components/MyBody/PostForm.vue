@@ -37,7 +37,7 @@ export default {
       }
     }
   },
-  name: "PostForm"
+  name: "post-form"
 }
 </script>
 
