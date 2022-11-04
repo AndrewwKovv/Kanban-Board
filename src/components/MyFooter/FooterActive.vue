@@ -1,12 +1,12 @@
 <template>
-  <div class="footer__wrapper">
+  <footer class="footer__wrapper">
     <p>
       Ковшов Андрей 211-321
     </p>
     <a href="#" class="footer__up">
       Наверх
     </a>
-  </div>
+  </footer>
 </template>
 
 <script>
@@ -19,12 +19,16 @@ export default {
 .footer__wrapper{
   display: flex;
   justify-content: space-between;
-  background: aliceblue;
   padding: 20px 100px;
-  color: dodgerblue;
+  color: var(--board-text);
+  background-color: var(--secondary-color);
+  transition: 0.4s;
 }
 .footer__up{
-  color: dodgerblue;
+  color: var(--board-text);
   text-decoration: none;
+}
+.footer__up:visited {
+  color: var(--board-text);
 }
 </style>

@@ -1,12 +1,10 @@
 <template>
-  <div class="header__wrapper">
+  <header class="header__wrapper">
     <img src="@/assetLogo/HeaderLogo.svg" alt="logo" class="header__img">
     <h1 class="header__title">Kanban</h1>
-    <swap-theme
-        style="color: gray; background: aliceblue; border-radius: 20px"
-    >Темная тема
-    </swap-theme>
-  </div> 
+    <SwapTheme :theme="theme" :changeTheme="changeTheme"/>
+
+  </header>
 </template>
 
 
@@ -16,6 +14,11 @@ import SwapTheme from "@/components/MyHeader/SwapTheme";
 export default {
   name: "header-active",
   components: {SwapTheme},
+  props: {
+    theme: Boolean,
+    changeTheme: Function,
+    themeStyle: Object,
+  },
 
 }
 </script>
@@ -23,9 +26,11 @@ export default {
 <style scoped>
 .header__wrapper{
   padding: 10px 100px;
-  background: dodgerblue;
+  background-color: var(--main-color);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
 }
 .header__title{
   color: white;

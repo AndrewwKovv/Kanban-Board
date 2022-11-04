@@ -1,41 +1,60 @@
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent class="dialog__form">
+    Описание
     <my-input
-        v-model="post.title"
+        class="content__form"
+        v-model="post.body"
         type="text"
         placeholder="Описание"
     />
-    <my-input
-        v-model="post.body"
-        type="text"
-        placeholder="Приоритет"
-    />
+    Приоритет
+    <select
+        v-model="post.priority"
+        class="modal-post-input"
+    >
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
     <my-button
-        style="align-self: flex-end; margin-top: 15px"
-        @click="createPost"
+        class="btn__save"
+        @click="onClick"
     >Сохранить</my-button>
   </form>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton";
+import MyInput from "@/components/UI/MyInput";
 export default {
+  components: {MyInput, MyButton},
+  props: {
+    body: String,
+    priority: Number,
+    id: Number,
+    handleModal: Function,
+    show: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data(){
     return{
       post: {
-        title: '',
-        body: ''
-      }
+        body: this.body,
+        priority: this.priority,
+        id: Number(this.id),
+      },
     }
   },
+
   methods:{
-    createPost(){
-      this.post.id = Date.now();
-      this.$emit('create', this.post)
-      this.post = {
-        title: '',
-        body: ''
-      }
-    }
+    onClick() {
+
+      this.handleModal(this.post.body, this.post.priority,this.post.id)
+      this.$emit('update:show', false)
+
+    },
   },
   name: "post-form"
 }
@@ -43,7 +62,31 @@ export default {
 
 <style scoped>
 form{
+
   display: flex;
   flex-direction: column;
+}
+.modal-post-input{
+  margin: 5px 0;
+  height: 37px;
+  width: 100%;
+  border: 1px solid dodgerblue;
+  color: var(--board-text);
+  background-color: var(--secondary-color);
+  padding: 0 10px;
+}
+.content__form{
+  background-color: var(--secondary-color);
+  margin-bottom: 20px;
+}
+.dialog__form{
+  color: dodgerblue;
+}
+.btn__save{
+  align-self: center;
+  margin-top: 60px;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 5px;
 }
 </style>

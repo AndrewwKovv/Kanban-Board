@@ -1,9 +1,9 @@
 <template>
-  <div class="switch-wrapper" :style="themeStyle">
+  <div class="switch-wrapper" >
     <label class="switch">
       <span class="on">ON</span>
       <span class="off">OFF</span>
-      <input type="checkbox" v-model="theme" @click="changeTheme">
+      <input type="checkbox"  @click="changeTheme">
       <span class="slider round"></span>
     </label>
   </div>
@@ -11,12 +11,14 @@
 
 <script>
 export default {
-  name: "swap-theme",
+  name: "SwapTheme",
+
   props: {
     theme: Boolean,
     changeTheme: Function,
-    themeStyle: Object,
-  }
+
+  },
+
 }
 </script>
 
@@ -38,9 +40,11 @@ switch-wrapper {
   font-size: 13px;
 }
 .off {
+  color: white;
   left: 31px;
 }
 .on {
+  color: white;
   left: 7px;
 }
 .switch {
@@ -72,7 +76,7 @@ switch-wrapper {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--main-color__text);
+  background-color: var(--round-color);
   -webkit-transition: .4s;
   transition: .4s;
 }
