@@ -2,7 +2,7 @@
   <div class="body__wrapper">
     <my-button
         @click="showDialog"
-        style="margin: 15px 150px; width: 150px;height: 35px"
+        class="body__btn"
     >
       Создать задачу
     </my-button>
@@ -10,14 +10,14 @@
         body=''
         :priority="1"
         :id="0"
-        :handleModal="handleModal"
+        :handleDial="handleDial"
         v-model:show="dialogVisible"
         />
       <board-list
           :posts="posts"
           :statuses="statuses"
           :movePost="movePost"
-          :handleModal="handleModal"
+          :handleDial="handleDial"
 
       />
   </div>
@@ -42,7 +42,7 @@ export default {
     posts: Object,
     statuses: Object,
     movePost: Function,
-    handleModal: Function
+    handleDial: Function
   },
   methods:{
     showDialog(){
@@ -55,9 +55,23 @@ export default {
 
 <style scoped>
 .body__wrapper{
-  position: relative;
+  display: grid;
   transition: 0.4s;
-  height: 100vh;
+  background-color: var(--body-background);
+  width: 100%;
+  margin: auto;
+}
 
+.body__btn{
+  margin: 15px 150px;
+  width: 150px;
+  height: 35px
+}
+@media (max-width: 762px) {
+  .body__btn {
+
+    margin: 15px 15px;
+
+  }
 }
 </style>

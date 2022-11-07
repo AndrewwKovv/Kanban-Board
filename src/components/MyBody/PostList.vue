@@ -9,7 +9,7 @@
         :post = "post"
         :status="statusesName[boardId]"
         :movePost="movePost"
-        :handleModal="handleModal"
+        :handleDial="handleDial"
     >
     </post-item>
 
@@ -30,7 +30,7 @@ export default {
     posts: Object,
     boardId: Number,
     movePost: Function,
-    handleModal: Function,
+    handleDial: Function,
   },
   methods:{
     onDrop(e) {

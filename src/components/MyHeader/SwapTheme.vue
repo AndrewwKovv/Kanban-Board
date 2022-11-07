@@ -65,7 +65,7 @@ switch-wrapper {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--switcher-background-color);
+  background-color: var(--switcher-color);
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -81,7 +81,7 @@ switch-wrapper {
   transition: .4s;
 }
 input:checked+.slider {
-  background-color: var(--switcher-background-color);
+  background-color: var(--switcher-color);
 }
 input:checked+.slider:before {
   -webkit-transform: translateX(45px);

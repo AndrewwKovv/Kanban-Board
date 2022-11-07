@@ -47,7 +47,7 @@ export default {
     body: String,
     priority: Number,
     id: Number,
-    handleModal:Function,
+    handleDial: Function,
     show: {
       type: Boolean,
       default: false,
@@ -77,16 +77,13 @@ export default {
         console.log('!')
       }
       else{
-        this.handleModal(this.post.body, this.post.priority,this.post.id)
+        this.handleDial(this.post.body, this.post.priority,this.post.id)
         this.$emit('update:show', false)
         this.post.body = ''
         this.post.priority = "1"
       }
-
-
     },
   }
-
 }
 </script>
 
@@ -106,7 +103,7 @@ export default {
 }
 .dialog__content{
   margin: auto;
-  background-color: var(--content-background);
+  background-color: var(--body-background);
   border: 1.5px solid dodgerblue;
   border-radius: 10px;
   min-height: 170px;

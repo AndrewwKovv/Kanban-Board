@@ -21,7 +21,7 @@
       :id="postId"
       :body="postBody"
       :priority="postPriority"
-      :handleModal="handleModal" />
+      :handleDial="handleDial" />
 
 </template>
 
@@ -44,7 +44,7 @@ export default {
     movePost: Function,
     postBody: String,
     postPriority: Number,
-    handleModal: Function,
+    handleDial: Function,
   },
   methods:{
     showDialog(){

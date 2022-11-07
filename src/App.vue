@@ -5,7 +5,7 @@
         :statuses="statuses"
         :posts="posts"
         :movePost="movePost"
-        :handleModal="handleModal"
+        :handleDial="handleDial"
     >
     </body-active>
     <footer-active/>
@@ -19,7 +19,6 @@ import HeaderActive from "@/components/MyHeader/HeaderActive";
 import BodyActive from "@/components/MyBody/BodyActive";
 import FooterActive from "@/components/MyFooter/FooterActive";
 
-
  export default {
    components:{
      BodyActive,
@@ -29,20 +28,21 @@ import FooterActive from "@/components/MyFooter/FooterActive";
    data(){
      return{
        newId: Number,
+       theme: false,
        posts: [
          {id: 1,
            body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-           data: new Date(2022, 6, 13),
+           data: new Date(2022, 6, 13, 17, 4,33),
            priority: 1,
          },
          {id: 2,
            body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-           data: new Date(2022, 8, 1),
+           data: new Date(2022, 8, 1,17, 3,13),
            priority: 2,
          },
          {id: 3,
            body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-           data: new Date(2022, 7, 16),
+           data: new Date(2022, 7, 16,17, 1,32),
            priority: 3,
          },
        ],
@@ -51,11 +51,10 @@ import FooterActive from "@/components/MyFooter/FooterActive";
          work: [2],
          ready: [3],
        },
-       theme: false,
      }
    },
    methods: {
-     handleModal(body, priority, postId) {
+     handleDial(body, priority, postId) {
        switch (postId) {
          case 0:
            this.newId = 0;
@@ -74,15 +73,12 @@ import FooterActive from "@/components/MyFooter/FooterActive";
            break
          default:
            this.posts = this.posts.map((post) => {
-             console.log(post)
-             if (this.post.id === postId) {
+             if (post.id === postId) {
                post.body = body
                post.priority = priority
              }
              return post
            })
-
-
        }
      },
      movePost(id, direction) {
@@ -110,11 +106,9 @@ import FooterActive from "@/components/MyFooter/FooterActive";
            return ({
              '--main-color': '#33417C',
              '--secondary-color': '#585858',
-             '--main-color__text': '#ECECEC',
-             '--switcher-background-color': '#4355A1',
-             '--content-background': '#323332',
+             '--switcher-color': '#4355A1',
+             '--body-background': '#323332',
              '--board-text': '#ECECEC',
-             '--dialog-text': '#33417C',
              '--round-color': '#FFFFFF',
              '--btn-color': '#1E90FFFF',
            })
@@ -122,11 +116,9 @@ import FooterActive from "@/components/MyFooter/FooterActive";
            return ({
              '--main-color': '#2599FB',
              '--secondary-color': '#F2F9FF',
-             '--main-color__text': '#FFFFFF',
-             '--switcher-background-color': '#BBE0FD',
-             '--content-background': "#FFFFFF",
+             '--switcher-color': '#BBE0FD',
+             '--body-background': "#FFFFFF",
              '--board-text': '#2599FB',
-             '--dialog-text': '#BBE0FD',
              '--round-color': '#FFFFFF',
              '--btn-color': '#FFFFFF',
            })
@@ -146,7 +138,8 @@ import FooterActive from "@/components/MyFooter/FooterActive";
   display: grid;
   grid-template-rows: auto 1fr auto;
   transition: 0.4s;
-  background: var(--content-background);
+  height: 100vh;
+  background: var(--body-background);
 }
 
 </style>

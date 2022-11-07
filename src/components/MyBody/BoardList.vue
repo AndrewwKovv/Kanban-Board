@@ -6,7 +6,7 @@
         :posts="filteredPosts(posts, status)"
         :boardId="index"
         :movePost="movePost"
-        :handleModal="handleModal"
+        :handleDial="handleDial"
     >
 
 
@@ -23,7 +23,7 @@ export default {
     posts: Object,
     statuses: Object,
     movePost: Function,
-    handleModal: Function,
+    handleDial: Function,
 
 
   },
@@ -42,6 +42,13 @@ export default {
   width: 100%;
   display: flex;
   gap: 20px;
+}
+@media (max-width: 930px) {
+  .board__wrapper {
+    flex-direction: column;
+    padding: 20px 15px;
+
+  }
 }
 
 </style>

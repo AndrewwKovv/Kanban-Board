@@ -19,7 +19,7 @@
           :postId="post.id"
           :postBody="post.body"
           :postPriority="post.priority"
-          :handleModal="handleModal"
+          :handleDial="handleDial"
     />
     </div>
   </div>
@@ -33,7 +33,7 @@ export default {
     post: Object,
     movePost: Function,
     status: String,
-    handleModal: Function,
+    handleDial: Function,
   },
   methods:{
     onDragStart(e) {
@@ -64,12 +64,12 @@ export default {
 
 <style scoped>
 .post{
-  background-color: var(--content-background);
+  background-color: var(--body-background);
   margin: 15px 0;
+  width: 100%;
   padding: 15px;
   border: 2px solid dodgerblue;
   align-items: center;
-
 }
 .post__head{
   display: flex;
@@ -78,10 +78,12 @@ export default {
 }
 .post__body{
   margin-bottom: 10px;
+
 }
 .post__text{
   color: dodgerblue;
   margin-bottom: 25px;
+  word-break: break-word;
 }
 .post__btns{
   display: flex;
