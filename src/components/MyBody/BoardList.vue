@@ -3,11 +3,9 @@
     <post-list
         v-for="(status, key, index) in statuses"
         :key="index"
-        :posts="getFilteredCards(posts, status)"
+        :posts="filteredPosts(posts, status)"
         :boardId="index"
         :movePost="movePost"
-        :dialogVisible="dialogVisible"
-        :showDialog="showDialog"
         :handleModal="handleModal"
     >
 
@@ -19,20 +17,19 @@
 <script>
 import PostList from "@/components/MyBody/PostList";
 export default {
-  name: "BoardList",
+  name: "board-list",
   components: {PostList},
   props:{
     posts: Object,
     statuses: Object,
-    dialogVisible: Boolean,
     movePost: Function,
-    showDialog: Function,
     handleModal: Function,
+
 
   },
   methods:{
-    getFilteredCards(posts, ids) {
-      return posts.filter((post) => ids.includes(post.id))
+    filteredPosts(posts, postId) {
+      return this.posts.filter((post) => postId.includes(post.id))
     },
   },
 
@@ -41,8 +38,10 @@ export default {
 
 <style scoped>
 .board__wrapper{
+  padding: 20px 150px;
+  width: 100%;
   display: flex;
-  padding:  0 50px;
-  justify-content: space-between;
+  gap: 20px;
 }
+
 </style>

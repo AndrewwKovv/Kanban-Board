@@ -1,33 +1,13 @@
 <template>
   <div class="app" :style="themeStyle">
     <header-active :theme="theme" :changeTheme="() => theme = !theme" />
-    <my-button
-
-        @click="showDialog"
-        style="margin: 15px 150px; width: 150px;height: 35px"
-    >
-      Создать задачу
-    </my-button>
-    <my-dialog v-model:show="dialogVisible" >
-      <post-form
-          body=""
-          priority="1"
-          id="0"
-          v-model:show="dialogVisible"
-          :handleModal="handleModal"
-      />
-    </my-dialog>
     <body-active
         :statuses="statuses"
         :posts="posts"
-        :dialogVisible="dialogVisible"
         :movePost="movePost"
-        :showDialog="showDialog"
         :handleModal="handleModal"
-
     >
     </body-active>
-
     <footer-active/>
 
   </div>
@@ -38,19 +18,13 @@
 import HeaderActive from "@/components/MyHeader/HeaderActive";
 import BodyActive from "@/components/MyBody/BodyActive";
 import FooterActive from "@/components/MyFooter/FooterActive";
-import MyButton from "@/components/UI/MyButton";
-import MyDialog from "@/components/UI/MyDialog";
-import PostForm from "@/components/MyBody/PostForm";
+
 
  export default {
    components:{
-     PostForm,
-     MyDialog,
-     MyButton,
      BodyActive,
      FooterActive,
      HeaderActive,
-
    },
    data(){
      return{
@@ -77,16 +51,13 @@ import PostForm from "@/components/MyBody/PostForm";
          work: [2],
          ready: [3],
        },
-       dialogVisible: false,
        theme: false,
      }
    },
    methods: {
      handleModal(body, priority, postId) {
-       console.log(postId)
        switch (postId) {
          case 0:
-
            this.newId = 0;
            this.posts.map((obj) => {
              if (obj.id > this.newId) {
@@ -102,8 +73,8 @@ import PostForm from "@/components/MyBody/PostForm";
            })
            break
          default:
-
            this.posts = this.posts.map((post) => {
+             console.log(post)
              if (this.post.id === postId) {
                post.body = body
                post.priority = priority
@@ -111,15 +82,16 @@ import PostForm from "@/components/MyBody/PostForm";
              return post
            })
 
+
        }
      },
      movePost(id, direction) {
        let statusIndex
        const keys = Object.keys(this.statuses)
        keys.forEach((status, index) => {
-         const statusArray = Object.values(this.statuses[status])
-         if (statusArray.includes(id)) {
-           this.statuses[status] = statusArray.filter( (statusId) => statusId !== id )
+         const statusArr = Object.values(this.statuses[status])
+         if (statusArr.includes(id)) {
+           this.statuses[status] = statusArr.filter( (statusId) => statusId !== id )
            statusIndex = index + direction
          }
        })
@@ -129,13 +101,6 @@ import PostForm from "@/components/MyBody/PostForm";
 
        this.statuses[keys[statusIndex]].push(id)
      },
-
-
-     showDialog(){
-       this.dialogVisible = true;
-     },
-
-
 
    },
    computed: {
@@ -151,6 +116,7 @@ import PostForm from "@/components/MyBody/PostForm";
              '--board-text': '#ECECEC',
              '--dialog-text': '#33417C',
              '--round-color': '#FFFFFF',
+             '--btn-color': '#1E90FFFF',
            })
          default:
            return ({
@@ -162,6 +128,7 @@ import PostForm from "@/components/MyBody/PostForm";
              '--board-text': '#2599FB',
              '--dialog-text': '#BBE0FD',
              '--round-color': '#FFFFFF',
+             '--btn-color': '#FFFFFF',
            })
        }
      },

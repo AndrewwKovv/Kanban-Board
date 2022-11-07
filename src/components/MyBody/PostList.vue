@@ -1,22 +1,18 @@
 <template>
-  <div v-if="posts.length > 0" class="post__list" :id="boardId">
-    <div class="post__wrapper">
-      <h2 class="post__title">
-        {{ statusesName[boardId] }} ({{ posts.length }})
-      </h2>
-      <post-item
-          v-for="post in posts"
-          :key="post.id"
-          :post = "post"
-          :status="statusesName[boardId]"
-          :movePost="movePost"
-          :dialogVisible="dialogVisible"
-          :showDialog="showDialog"
-          :handleModal="handleModal"
+  <div class="post__list" :id="boardId" @drop="onDrop" @dragover.prevent @dragenter.prevent>
+    <h2 class="post__title">
+      {{ statusesName[boardId] }} ({{ posts.length }})
+    </h2>
+    <post-item
+        v-for="post in posts"
+        :key="post.id"
+        :post = "post"
+        :status="statusesName[boardId]"
+        :movePost="movePost"
+        :handleModal="handleModal"
+    >
+    </post-item>
 
-      >
-      </post-item>
-    </div>
   </div>
 
 </template>
@@ -31,33 +27,33 @@ export default {
     }
   },
   props:{
-    posts:{
-      type: Array,
-      required: true,
-    },
-    showDialog: Function,
+    posts: Object,
     boardId: Number,
     movePost: Function,
     handleModal: Function,
-    dialogVisible: Boolean,
   },
-  name: "PostList"
+  methods:{
+    onDrop(e) {
+      const postId = +e.dataTransfer.getData('itemId');
+      const ancientBoardId = +e.dataTransfer.getData('boardId');
+      const direction = this.boardId - ancientBoardId;
+      this.movePost(postId, direction);
+    },
+  },
+  name: "post-list"
 }
 </script>
 
 <style scoped>
 .post__list{
-  display: flex;
+  transition: 0.4s;
+  width: 100%;
   justify-content: space-between;
   padding: 20px;
-  height: 100vh;
-}
-.post__wrapper{
-  padding: 20px;
   background-color: var(--secondary-color);
-
-
+  min-height: 550px;
 }
+
 .post__title{
   text-align: center;
   color: dodgerblue;

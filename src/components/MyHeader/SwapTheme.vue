@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "SwapTheme",
+  name: "swap-theme",
 
   props: {
     theme: Boolean,

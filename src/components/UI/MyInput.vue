@@ -22,5 +22,6 @@ export default {
   border: 1px solid dodgerblue;
   padding: 10px 15px;
   margin-top: 5px;
+  color:  dodgerblue;
 }
 </style>

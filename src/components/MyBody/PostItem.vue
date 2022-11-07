@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <div class="post" :id="post.id" draggable="true" @dragstart="onDragStart">
     <div class="post__text">
       <div class="post__head">
         <h3><strong>
@@ -9,7 +9,7 @@
           {{ post.priority }}
         </span>
       </div>
-      <p>{{ post.body }}</p>
+      <p  class="post__body">{{ post.body }}</p>
       <p>{{ formateDate(post.data) }}</p>
     </div>
     <div class="post__btns">
@@ -19,8 +19,6 @@
           :postId="post.id"
           :postBody="post.body"
           :postPriority="post.priority"
-          :dialogVisible="dialogVisible"
-          :showDialog="showDialog"
           :handleModal="handleModal"
     />
     </div>
@@ -35,22 +33,24 @@ export default {
     post: Object,
     movePost: Function,
     status: String,
-    dialogVisible: Boolean,
-    showDialog: Function,
     handleModal: Function,
   },
   methods:{
+    onDragStart(e) {
+      e.dataTransfer.setData('itemId', e.target.id);
+      e.dataTransfer.setData('boardId', e.target.parentNode.id);
+    },
     formateDate(date) {
-      const year = date.getFullYear()
-      const month = date.getMonth() + 1
-      const _date = date.getDate()
       const time = String(date).slice(16, 25)
-      const formatted = `${
+      const _date = date.getDate()
+      const month = date.getMonth() + 1
+      const year = date.getFullYear()
+      const formated = `${
           _date.toString().length === 1 ? '0' + _date : _date
       }.${
           month.toString().length === 1 ? '0' + month : month
       }.${year} ${time}`
-      return formatted
+      return formated
     },
   },
   computed: {
@@ -58,7 +58,7 @@ export default {
       return 'post__priority_' + String(this.post.priority)
     },
   },
-  name: "PostItem"
+  name: "post-item"
 }
 </script>
 
@@ -74,9 +74,14 @@ export default {
 .post__head{
   display: flex;
   justify-content: space-between;
+  margin-bottom:25px;
+}
+.post__body{
+  margin-bottom: 10px;
 }
 .post__text{
   color: dodgerblue;
+  margin-bottom: 25px;
 }
 .post__btns{
   display: flex;
@@ -93,13 +98,13 @@ export default {
   color: var(--main-color);
 }
 .post__priority_1 {
-  background-color: #fea3a2;
+  background-color: #FF9292;
 }
 .post__priority_2 {
-  background-color: #fffc9e;
+  background-color: #F6FF92;
 }
 .post__priority_3 {
-  background-color: #adecc7;
+  background-color: #92FF96;
 }
 
 </style>
